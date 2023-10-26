@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@fazwaz-nx/nestjs-shared/utils/config": ["libs/nestjs-shared/utils/config/src/index.ts"],
+      "@fazwaz-nx/nestjs-shared/utils/database": ["libs/nestjs-shared/utils/database/src/index.ts"],
+      "@fazwaz-nx/nestjs-shared/utils/logger": ["libs/nestjs-shared/utils/logger/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

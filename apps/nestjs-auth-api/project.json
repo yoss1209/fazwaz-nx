@@ -1,0 +1,64 @@
+{
+  "name": "nestjs-auth-api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/nestjs-auth-api/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/nestjs-auth-api",
+        "main": "apps/nestjs-auth-api/src/main.ts",
+        "tsConfig": "apps/nestjs-auth-api/tsconfig.app.json",
+        "assets": ["apps/nestjs-auth-api/src/assets"],
+        "isolatedConfig": true,
+        "webpackConfig": "apps/nestjs-auth-api/webpack.config.js"
+      },
+      "configurations": {
+        "development": {},
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "nestjs-auth-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "nestjs-auth-api:build:development"
+        },
+        "production": {
+          "buildTarget": "nestjs-auth-api:build:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/nestjs-auth-api/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/nestjs-auth-api/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    }
+  },
+  "tags": ["type:app", "scope:nestjs-auth"]
+}
